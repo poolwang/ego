@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<context:property-placeholder file-encoding="utf-8" location="classpath:db.properties"/>
+<!-- 1、创建数据源-->
+	 <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+	 	<property name="driverClassName" value="${jdbc.driver}"/>
+	 	<property name="url" value="${jdbc.url}"/>
+	 	<property name="username" value="${jdbc.username}"/>
+	 	<property name="password" value="${jdbc.password}"/>
+	 </bean>
+	 
+	<!-- 第二步：配置会话工厂 -->
+     <bean name="sqlSessionFacotry" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+       <property name="dataSource" ref="dataSource"></property>
+       <property name="plugins">
+         <array>
+           <!-- 物理分页的支持 -->
+           <bean class="com.baomidou.mybatisplus.plugins.PaginationInterceptor"></bean>
+           <!-- 配置SQL输出 -->
+           <bean class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor"></bean>
+         </array>
+       </property>
+     </bean> 
+	 <!-- 第三步：扫描映射接口的动态对象 -->
+     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFacotry"></property>
+        <!-- 指定扫描的包名 -->
+        <property name="basePackage" value="cn.wl.base.mapper"></property>
+        <!-- 【可选】 指定扫描带@Mapper注解开头的接口-->
+        
+     </bean>
+     
+     <!-- 第四步：事务代理 -->
+     <bean name="tx" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+     <property name="dataSource" ref="dataSource"></property>
+     </bean>
+     <tx:annotation-driven transaction-manager="tx" />
+</beans>

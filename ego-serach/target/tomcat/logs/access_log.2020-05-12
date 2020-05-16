@@ -1,0 +1,5 @@
+127.0.0.1 - - [12/May/2020:21:29:56 +0800] "GET /search/doSearch?page=1&keyword=%E5%B0%8F%E7%B1%B3%E6%89%8B%E6%9C%BA HTTP/1.1" 200 20645 http-bio-8083-exec-1 645
+127.0.0.1 - - [12/May/2020:21:34:37 +0800] "GET /search/doSearch?page=1&keyword=%E5%B0%8F%E7%B1%B3 HTTP/1.1" 200 3633 http-bio-8083-exec-1 282
+127.0.0.1 - - [12/May/2020:21:38:26 +0800] "GET /search/doSearch?page=1&keyword=%E5%B0%8F%E7%B1%B3 HTTP/1.1" 200 3633 http-bio-8083-exec-3 45
+127.0.0.1 - - [12/May/2020:21:38:37 +0800] "GET /search/doSearch?page=1&keyword=%E5%BC%A0%E4%B8%AB HTTP/1.1" 200 366 http-bio-8083-exec-5 18
+127.0.0.1 - - [12/May/2020:21:41:23 +0800] "GET /search/doSearch?page=1&keyword=%E5%BC%A0%E4%B8%AB HTTP/1.1" 200 663 http-bio-8083-exec-7 14

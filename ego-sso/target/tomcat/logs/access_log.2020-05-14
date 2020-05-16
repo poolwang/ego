@@ -1,0 +1,12 @@
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:04:35 +0800] "GET /user/showRegister HTTP/1.1" 200 7685 http-bio-8084-exec-1 82
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:04:48 +0800] "GET /user/check/admin/1?r=0.7516298413279876 HTTP/1.1" 200 49 http-bio-8084-exec-3 141
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:09:14 +0800] "GET /user/check/poolwang/1?r=0.5547501474509993 HTTP/1.1" 200 48 http-bio-8084-exec-1 179
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:09:14 +0800] "GET /user/check/15625081995/2?r=0.0739714337999442 HTTP/1.1" 200 49 http-bio-8084-exec-2 8
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:09:25 +0800] "GET /user/check/poolwang/1?r=0.7949233462196006 HTTP/1.1" 200 48 http-bio-8084-exec-3 6
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:09:25 +0800] "GET /user/check/15602492121/2?r=0.7325091822604457 HTTP/1.1" 200 48 http-bio-8084-exec-4 6
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:09:25 +0800] "POST /user/register HTTP/1.1" 200 48 http-bio-8084-exec-5 24
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:09:26 +0800] "GET /user/showLogin HTTP/1.1" 200 4009 http-bio-8084-exec-6 88
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:09:26 +0800] "GET /css/login.css HTTP/1.1" 304 - http-bio-8084-exec-8 4
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:09:26 +0800] "GET /images/login-all-bg.png HTTP/1.1" 304 - http-bio-8084-exec-9 2
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:09:26 +0800] "GET /images/544a11d3Na5a3d566.png HTTP/1.1" 304 - http-bio-8084-exec-7 2
+0:0:0:0:0:0:0:1 - - [14/May/2020:13:09:38 +0800] "POST /user/login HTTP/1.1" 200 82 http-bio-8084-exec-7 27

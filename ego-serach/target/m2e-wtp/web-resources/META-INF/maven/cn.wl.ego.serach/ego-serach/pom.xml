@@ -1,0 +1,94 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.wl</groupId>
+    <artifactId>ego</artifactId>
+    <version>1.0</version>
+  </parent>
+  <groupId>cn.wl.ego.serach</groupId>
+  <artifactId>ego-serach</artifactId>
+  <packaging>war</packaging>
+  <dependencies>
+<!-- SpringMVC依赖的jar包 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<!-- mysql driver -->
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<!-- spirng jdbc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<!-- mybatis-plus -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>
+		</dependency>
+
+		<!-- 连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+		</dependency>
+
+		<!-- jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+<!-- solr客户端 -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+		</dependency>
+
+<!-- ActiveMQ客户端完整jar包依赖 -->
+<dependency>
+	<groupId>org.apache.activemq</groupId>
+	<artifactId>activemq-all</artifactId>
+	<version>5.9.0</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.activemq</groupId>
+    <artifactId>activemq-pool</artifactId>
+    <version>5.9.0</version>
+</dependency>
+<!-- Spring-JMS插件相关jar包依赖 -->
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-jms</artifactId>
+	<version>4.3.16.RELEASE</version>
+</dependency>
+
+		<dependency>
+			<groupId>cn.wl</groupId>
+			<artifactId>ego-base</artifactId>
+			<version>1.0</version>
+		</dependency>
+  </dependencies>
+  <build>
+		<plugins>
+			<!-- 配置Tomcat插件 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<!-- 在插件中，指定项目的访问路径 指定项目访问的端口 -->
+				<configuration>
+					<port>8083</port>
+					<path>/</path>
+					<uriEncoding>UTF-8</uriEncoding>
+
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

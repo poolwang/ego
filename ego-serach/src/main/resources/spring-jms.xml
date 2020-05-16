@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+		
+		<!-- 第一步：配置连接 -->
+	<bean name="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<!-- 连接工厂设置 -->
+		<property name="connectionFactory">
+			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
+				<property name="userName" value="${MQ_USER}"></property>
+				<property name="password" value="${MQ_PASSWD}"></property>
+				<property name="brokerURL" value="${MQ_ADDRESS}"></property>
+			</bean>
+		</property>
+		<!-- 最大连接数 -->
+		<property name="maxConnections" value="20"></property>
+	</bean>
+	<!-- 第二步：配置缓存会话的工厂
+	问题：缓存会话的工厂是谁提供的？spring-jms提供
+	 -->
+	<bean name="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+	   <property name="targetConnectionFactory" ref="pooledConnectionFactory"></property>
+	   <property name="sessionCacheSize" value="10"></property>
+	</bean>
+	
+	<!-- 第三步：获得操作对象 -->
+	<!-- <bean name="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+	  <property name="connectionFactory" ref="cachingConnectionFactory"></property>
+	  指定默认的目的地
+	  <property name="defaultDestinationName" value="${MQ_ITEM_QUEUE_NAME}"></property>
+	</bean> -->
+	<!-- 第四步：配置消费者的监听器 -->
+	<!-- 配置监听器对象 -->
+	<bean name="itemListener" class="cn.wl.serach.listener.ItemListener"></bean>
+	
+	<jms:listener-container connection-factory="cachingConnectionFactory" destination-type="queue" >
+	   <jms:listener destination="${MQ_ITEM_QUEUE_NAME}" ref="itemListener"/>
+	</jms:listener-container>
+</beans>		
+		

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		">
+<context:property-placeholder file-encoding="UTF-8" location="classpath:db.properties"/> 
+<context:component-scan base-package="cn.wl" />
+<!-- 一：配置数据源 -->
+	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	   <property name="driverClassName" value="${jdbc.driver}"/>
+	 	<property name="url" value="${jdbc.url}"/>
+	 	<property name="username" value="${jdbc.username}"/>
+	 	<property name="password" value="${jdbc.password}"/>
+		<property name="maxActive" value="10"/>
+	</bean>	
+	
+<!-- 二：创建会话工厂 -->
+    <bean name="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="cn.wl.base.pojo" />
+        <property name="plugins">
+            <list>
+				<!-- 分页插件 -->
+				<bean class="com.baomidou.mybatisplus.plugins.PaginationInterceptor" />
+				
+				<bean class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">
+						<!-- 配置sql响应时间，开发阶段方便做调优 -->
+						<property name="maxTime" value="1000000"/>
+						
+						<!-- 输出sql语句 -->
+						<property name="format" value="true"/>
+				</bean>
+			</list>
+        </property>
+    </bean>
+
+<!-- 三：映射接口扫描器 -->
+      <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+            <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+            <property name="basePackage" value="cn.wl.base.mapper" />
+      </bean>
+
+<!-- 四：编程式事务 -->
+	  <bean name="tx" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	       <property name="dataSource" ref="dataSource"/>
+	  </bean>
+	  
+	  <tx:annotation-driven transaction-manager="tx"/>
+	  
+</beans>		

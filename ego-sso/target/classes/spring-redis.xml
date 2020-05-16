@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+ <!-- 配置连接池 -->
+      <bean name="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+          <property name="maxTotal" value="20"></property>
+	  	<!-- 获取连接时的最大等待毫秒数,小于零:阻塞不确定的时间,默认-1 -->
+		<property name="maxWaitMillis" value="1500" />
+		<!-- 最大空闲数 -->
+		<property name="maxIdle" value="10"></property>
+      </bean>
+
+<!-- 配置redis集群 -->
+       <bean name="jedisCluster" class="redis.clients.jedis.JedisCluster">
+           <constructor-arg index="0">
+              <set>
+                  <bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg index="0" value="192.168.110.13"></constructor-arg>
+					<constructor-arg index="1" value="7001"></constructor-arg>
+				 </bean>
+				 <bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg index="0" value="192.168.110.13"></constructor-arg>
+					<constructor-arg index="1" value="7002"></constructor-arg>
+				</bean>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg index="0" value="192.168.110.13"></constructor-arg>
+					<constructor-arg index="1" value="7003"></constructor-arg>
+				</bean>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg index="0" value="192.168.110.13"></constructor-arg>
+					<constructor-arg index="1" value="7004"></constructor-arg>
+				</bean>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg index="0" value="192.168.110.13"></constructor-arg>
+					<constructor-arg index="1" value="7005"></constructor-arg>
+				</bean>
+				<bean class="redis.clients.jedis.HostAndPort">
+					<constructor-arg index="0" value="192.168.110.13"></constructor-arg>
+					<constructor-arg index="1" value="7006"></constructor-arg>
+				</bean>
+              </set>
+           </constructor-arg>
+           <constructor-arg index="1" ref="jedisPoolConfig"></constructor-arg>
+       </bean>
+
+</beans>
